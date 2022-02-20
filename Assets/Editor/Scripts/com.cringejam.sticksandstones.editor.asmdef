@@ -1,0 +1,14 @@
+{
+    "name": "com.cringejam.sticksandstones.editor",
+    "rootNamespace": "com.cringejam.sticksandstones.editor",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
