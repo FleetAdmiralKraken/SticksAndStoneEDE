@@ -10,24 +10,33 @@ namespace com.cringejam.sticksandstones {
 
         //Declare serializables
         [Header("Setup")]
+        [SerializeField] private Transform doorFeetTransform = null;
         [SerializeField] private Transform characterFeetTransform = null;
+        [SerializeField] private DoorScaleWall doorScaleWall = null;
 
         [Header("Specifications")]
         [SerializeField] private float distanceBeforeScaleChange = 2f;
-        [SerializeField] private float distanceMultipler = 0.25f;
 
         #endregion
 
         #region Update
 
         private void Update() {
+            //Scale door
+            ScaleDoor();
+            //Run door scale wall update
+            doorScaleWall.DoorScaleWallUpdate();
+        }
+
+        private void ScaleDoor() {
             //Declare
-            float distance = Vector3.Distance(transform.position, characterFeetTransform.position);
+            float distance = Vector3.Distance(doorFeetTransform.position, characterFeetTransform.position);
             Vector3 scale = Vector3.one;
             //Check
-            if (distance < distanceBeforeScaleChange) {;
+            if (distance < distanceBeforeScaleChange) {
+                ;
                 //Set
-                scale = new Vector3(distance, distance, distance) * distanceMultipler;
+                scale = new Vector3(distance, distance, distance) / distanceBeforeScaleChange;
             }
             //Change scale as getting closer
             transform.localScale = scale;
