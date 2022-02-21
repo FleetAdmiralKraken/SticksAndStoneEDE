@@ -11,8 +11,9 @@ namespace com.cringejam.sticksandstones {
         //Declare serializables
         [Header("Setup")]
         [SerializeField] private InputCache inputCache = null;
-        [SerializeField] private CJCharacterController cjCharacterController = null;
+        public CJCharacterController cjCharacterController = null;
         [SerializeField] private CJCursorLock cjCursorLock = null;
+        public Transform[] enemies = null;
 
         #endregion
 
@@ -20,6 +21,7 @@ namespace com.cringejam.sticksandstones {
 
         private void Start() {
             //Set
+            PublicStatics.gameManager = this;
             PublicStatics.inputCache = inputCache;
             //Set cursor lock
             cjCursorLock.SetCursorLock();

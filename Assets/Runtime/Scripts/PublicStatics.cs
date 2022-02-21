@@ -9,6 +9,7 @@ namespace com.cringejam.sticksandstones {
         #region Declares
 
         //Declare publics
+        public static GameManager gameManager = null;
         public static InputCache inputCache = null;
 
         #endregion
