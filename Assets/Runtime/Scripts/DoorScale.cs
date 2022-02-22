@@ -17,15 +17,21 @@ namespace com.cringejam.sticksandstones {
         [Header("Specifications")]
         [SerializeField] private float distanceBeforeScaleChange = 2f;
 
+        //Declare privates
+        private bool show = false;
+
         #endregion
 
         #region Update
 
         private void Update() {
-            //Scale door
-            ScaleDoor();
-            //Run door scale wall update
-            doorScaleWall.DoorScaleWallUpdate();
+            //Check
+            if (show) {
+                //Scale door
+                ScaleDoor();
+                //Run door scale wall update
+                doorScaleWall.DoorScaleWallUpdate();
+            }
         }
 
         private void ScaleDoor() {
@@ -40,6 +46,15 @@ namespace com.cringejam.sticksandstones {
             }
             //Change scale as getting closer
             transform.localScale = scale;
+        }
+
+        #endregion
+
+        #region Public functions
+
+        public void SetToShow() {
+            //Set
+            show = true;
         }
 
         #endregion

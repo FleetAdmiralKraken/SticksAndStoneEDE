@@ -13,6 +13,7 @@ namespace com.cringejam.sticksandstones {
         [Header("Setup")]
         [SerializeField] private CJCamera cjCamera = null;
         [SerializeField] private Rigidbody rigidbody = null;
+        public Transform feetTransform = null;
 
         [Header("Specifications")]
         [SerializeField] private Vector2 velocitySpeed = Vector2.one;

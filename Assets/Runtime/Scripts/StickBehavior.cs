@@ -47,9 +47,6 @@ namespace com.cringejam.sticksandstones {
         #region Update
 
         private void Update() {
-
-            Debug.Log(Vector3.Distance(PublicStatics.gameManager.enemies[0].position, transform.position));
-
             //Declare
             Transform enemyClosest = GetClosestEnemyFromList();
             //Check if not null
