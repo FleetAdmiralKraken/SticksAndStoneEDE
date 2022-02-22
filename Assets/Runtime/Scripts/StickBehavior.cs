@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace com.cringejam.sticksandstones {
 
@@ -9,12 +10,20 @@ namespace com.cringejam.sticksandstones {
         #region Declares
 
         //Declare serializables
+        [Header("Setup")]
+        [SerializeField] private Transform floatingSphereTransform = null;
+
         [Header("Specifications")]
-        [SerializeField] private float enemyDistanceToRotate = 1f;
+ 
         [SerializeField] private float rotationSpeed = 25f;
+        [SerializeField] private EnemiesAndDistances[] enemiesAndDistances = null;
+        [SerializeField] private LayerMask layerMask = ~0;
+
+        [Header("Attacking")]
+        [SerializeField] private int meeleDamage = 10;
+        [SerializeField] private int rangedDamage = 5;
 
         //Declare privates
-        private List<TransformAndDistance> enemiesWithinDistance = new List<TransformAndDistance>();
         private Quaternion originalLocalRotation = Quaternion.identity;
 
         #endregion
@@ -33,6 +42,13 @@ namespace com.cringejam.sticksandstones {
             }
         }
 
+        [Serializable]
+        private class EnemiesAndDistances {
+            //Declare
+            public string Tag = string.Empty;
+            public float DistanceToRaycast = 0f;
+        }
+
         #endregion
 
         #region Start
@@ -48,63 +64,51 @@ namespace com.cringejam.sticksandstones {
 
         private void Update() {
             //Declare
-            Transform enemyClosest = GetClosestEnemyFromList();
-            //Check if not null
-            if (enemyClosest != null) {
+            Transform enemy = null;
+            //Raycast
+            if (Physics.Raycast(floatingSphereTransform.position, floatingSphereTransform.forward, out RaycastHit raycastHit, float.MaxValue, layerMask)) {
+                //Loop
+                for (int i = 0; i < enemiesAndDistances.Length; i++) {
+                    //Check tag
+                    if (raycastHit.transform.CompareTag(enemiesAndDistances[i].Tag)) {
+                        //Check distance
+                        if (raycastHit.distance <= enemiesAndDistances[i].DistanceToRaycast) {
+                            //Set
+                            enemy = raycastHit.transform;
+                        }
+                        //Exit
+                        break;
+                    }
+                }
+            }
+            //Check
+            if (enemy != null) {
                 //Declare
-                Vector3 enemyDirection = enemyClosest.position - transform.position;
+                Vector3 enemyDirection = enemy.parent.GetChild(0).position - transform.position;
                 //Rotate towards
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(enemyDirection), GetRotationSpeed());
+                //Check for mouse
+                CheckForMouse();
             } else {
+
+                //Rotate towards
                 transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originalLocalRotation, GetRotationSpeed());
+            }
+        }
+
+        private void CheckForMouse() {
+            //Check for left click
+            if (Input.GetMouseButtonDown(0)) {
+                //Shoot enemy
+                Debug.Log("Enemy melee attack");
+            } else if (Input.GetMouseButtonDown(1)) { //Check for right click
+                Debug.Log("Enemy ranged attack");
             }
         }
 
         private float GetRotationSpeed() {
             //Return
             return rotationSpeed * Time.deltaTime;
-        }
-
-        private Transform GetClosestEnemyFromList() {
-            //Add enemies within distance
-            AddEnemiesWithinDistance();
-            //Declare
-            Transform enemyTransform = null;
-            //Check
-            if (enemiesWithinDistance.Count > 1) {
-                //Declare
-                float closestDistance = enemiesWithinDistance[0].Distance;
-                //Set
-                enemyTransform = enemiesWithinDistance[0].TheTransform;
-                //Loop
-                for (int i = 1; i < PublicStatics.gameManager.enemies.Length; i++) {
-                    //Check
-                    if (closestDistance > enemiesWithinDistance[i].Distance) {
-                        //Set
-                        enemyTransform = enemiesWithinDistance[i].TheTransform;
-                    }
-                }
-            } else if (enemiesWithinDistance.Count == 1) {
-                //Set
-                enemyTransform = enemiesWithinDistance[0].TheTransform;
-            }
-            //Empty list
-            enemiesWithinDistance.Clear();
-            //Return
-            return enemyTransform;
-        }
-
-        private void AddEnemiesWithinDistance() {
-            //Loop
-            for (int i = 0; i < PublicStatics.gameManager.enemies.Length; i++) {
-                //Declare
-                float distance = Vector3.Distance(PublicStatics.gameManager.enemies[i].position, PublicStatics.gameManager.cjCharacterController.transform.position);
-                //Check within
-                if (distance <= enemyDistanceToRotate) {
-                    //Add
-                    enemiesWithinDistance.Add(new TransformAndDistance(PublicStatics.gameManager.enemies[i], distance));
-                }
-            }
         }
 
         #endregion

@@ -13,6 +13,10 @@ namespace com.cringejam.sticksandstones {
         [SerializeField] private bool invertMouseY = false;
         [SerializeField] private Vector2 cameraXMinMax = new Vector2(-90f, 90f);
 
+        [Header("Raycasting")]
+        [SerializeField] private float interactDistance = 5f;
+        [SerializeField] private LayerMask interactLayerMask = ~0;
+
         //Declare privates
         private Vector2 cameraAxis = Vector2.zero;
 
@@ -35,6 +39,29 @@ namespace com.cringejam.sticksandstones {
         private float GetMouseY() {
             //Return
             return invertMouseY ? PublicStatics.inputCache.mouseAxes.floatAxes[1] : -PublicStatics.inputCache.mouseAxes.floatAxes[1];
+        }
+
+        public void TryToInteract() {
+            //Check for interact
+            if (Input.GetKeyDown(KeyCode.E)) {
+                //Raycast
+                if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, interactDistance, interactLayerMask)) {
+                    //Loop
+                    for (int i = 0; i < PublicStatics.gameManager.TextUIs.Length; i++) {
+                        //Check
+                        if (raycastHit.transform.CompareTag(PublicStatics.gameManager.TextUIs[i].Tag)) {
+                            //Add
+                            PublicStatics.gameManager.TextUIs[i].TheNumber += 1;
+                            //Update text
+                            PublicStatics.gameManager.TextUIs[i].TheText.text = PublicStatics.gameManager.TextUIs[i].TheNumber.ToString();
+                            //Destroy object
+                            Destroy(raycastHit.transform.gameObject);
+                            //Exit
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         #endregion

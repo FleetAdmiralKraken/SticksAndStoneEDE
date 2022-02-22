@@ -24,6 +24,11 @@ namespace com.cringejam.sticksandstones {
 
         #region Public functions
 
+        public void CJCharacterControllerUpdate() {
+            //Try to interact
+            cjCamera.TryToInteract();
+        }
+
         public void CJCharacterControllerLateUpdate() {
             //Camera late update
             transform.localRotation = Quaternion.Euler(0f, cjCamera.ApplyXRotationAndGetYRotation(rotationSpeed), 0f);

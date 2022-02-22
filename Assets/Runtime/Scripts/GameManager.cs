@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 namespace com.cringejam.sticksandstones {
 
@@ -14,6 +16,9 @@ namespace com.cringejam.sticksandstones {
         public CJCharacterController cjCharacterController = null;
         [SerializeField] private CJCursorLock cjCursorLock = null;
         public Transform[] enemies = null;
+
+        [Header("UI")]
+        public TextUI[] TextUIs = null;
 
         #endregion
 
@@ -29,11 +34,26 @@ namespace com.cringejam.sticksandstones {
 
         #endregion
 
+        #region Classes
+
+        [Serializable]
+        public class TextUI {
+            //Declare
+            public TextMeshProUGUI TheText = null;
+            public string Tag = string.Empty;
+            public GameObject Prefab = null;
+            [NonSerialized] public int TheNumber = 0;
+        }
+
+        #endregion
+
         #region Update
 
         private void Update() {
             //Cache the input
             inputCache.Cache();
+            //Run character controller update
+            cjCharacterController.CJCharacterControllerUpdate();
         }
 
         #endregion
