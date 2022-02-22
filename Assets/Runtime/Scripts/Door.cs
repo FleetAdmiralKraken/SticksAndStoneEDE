@@ -46,12 +46,7 @@ namespace com.cringejam.sticksandstones {
 
         private float GetLocalYRotation(float distance) {
             //Return
-            return RangeMapping(0f, openingAngle, doorOpenDistance, 0f, distance);
-        }
-        
-        private float RangeMapping(float a, float b, float x, float y, float z) {
-            //Return
-            return Mathf.Lerp(a, b, Mathf.InverseLerp(x, y, z));
+            return PublicStatics.RangeMapping(0f, openingAngle, doorOpenDistance, 0f, distance);
         }
 
         #endregion

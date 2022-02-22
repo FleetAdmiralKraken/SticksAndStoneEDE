@@ -11,6 +11,7 @@ namespace com.cringejam.sticksandstones {
         //Declare serializables
         [SerializeField] private DoorScale doorScale = null;
         [SerializeField] private Door door = null;
+        [SerializeField] private FloorScaleSpikes floorScaleSpikes = null;
 
         #endregion
 
@@ -25,6 +26,9 @@ namespace com.cringejam.sticksandstones {
                 //Fake door
                 doorScale.SetToShow();
             }
+
+            floorScaleSpikes.SetToShow();
+
         }
 
         #endregion

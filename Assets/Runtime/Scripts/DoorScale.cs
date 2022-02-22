@@ -11,7 +11,6 @@ namespace com.cringejam.sticksandstones {
         //Declare serializables
         [Header("Setup")]
         [SerializeField] private Transform doorFeetTransform = null;
-        [SerializeField] private Transform characterFeetTransform = null;
         [SerializeField] private DoorScaleWall doorScaleWall = null;
 
         [Header("Specifications")]
@@ -36,11 +35,10 @@ namespace com.cringejam.sticksandstones {
 
         private void ScaleDoor() {
             //Declare
-            float distance = Vector3.Distance(doorFeetTransform.position, characterFeetTransform.position);
+            float distance = Vector3.Distance(doorFeetTransform.position, PublicStatics.gameManager.cjCharacterController.feetTransform.position);
             Vector3 scale = Vector3.one;
             //Check
             if (distance < distanceBeforeScaleChange) {
-                ;
                 //Set
                 scale = new Vector3(distance, distance, distance) / distanceBeforeScaleChange;
             }

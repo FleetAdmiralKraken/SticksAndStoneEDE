@@ -14,6 +14,15 @@ namespace com.cringejam.sticksandstones {
 
         #endregion
 
+        #region Public functions
+
+        public static float RangeMapping(float a, float b, float x, float y, float z) {
+            //Return
+            return Mathf.Lerp(a, b, Mathf.InverseLerp(x, y, z));
+        }
+
+        #endregion
+
     }
 
 }
