@@ -33,6 +33,11 @@ namespace com.cringejam.sticksandstones {
             Cursor.visible = visible;
         }
 
+        public CursorLockMode GetCursorLockMode() {
+            //Return
+            return Cursor.lockState;
+        }
+
         #endregion
 
     }

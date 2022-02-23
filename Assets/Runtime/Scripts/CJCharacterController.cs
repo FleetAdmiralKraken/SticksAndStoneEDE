@@ -30,8 +30,11 @@ namespace com.cringejam.sticksandstones {
         }
 
         public void CJCharacterControllerLateUpdate() {
-            //Camera late update
-            transform.localRotation = Quaternion.Euler(0f, cjCamera.ApplyXRotationAndGetYRotation(rotationSpeed), 0f);
+            //Check
+            if (!PublicStatics.gameManager.craftMenu.activeSelf) {
+                //Camera late update
+                transform.localRotation = Quaternion.Euler(0f, cjCamera.ApplyXRotationAndGetYRotation(rotationSpeed), 0f);
+            }
         }
 
         public void CJCharacterControllerFixedUpdate() {
