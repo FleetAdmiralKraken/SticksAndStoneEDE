@@ -23,8 +23,21 @@ namespace com.cringejam.sticksandstones {
         [SerializeField] private int meeleDamage = 10;
         [SerializeField] private int rangedDamage = 5;
 
+        [Header("Meele Attacking Animation")]
+        [SerializeField] private Transform stickLocalRotatorTransform = null;
+        [SerializeField] private float rotateForwardSpeed = 10f;
+
+        [Header("Range Attacking Animation")]
+        [SerializeField] private Transform stickLocalTransform = null;
+        [SerializeField] private Transform stickRangedBackTransform = null;
+        [SerializeField] private Transform stickRangedForwardTransform = null;
+        [SerializeField] private float forwardSpeed = 10f;
+
         //Declare privates
         private Quaternion originalLocalRotation = Quaternion.identity;
+        private attackStates AttackState = attackStates.NotAttacking;
+        private bool meeleForward = false;
+        private bool rangedForward = false;
 
         #endregion
 
@@ -47,6 +60,14 @@ namespace com.cringejam.sticksandstones {
             //Declare
             public string Tag = string.Empty;
             public float DistanceToRaycast = 0f;
+        }
+
+        #endregion
+
+        #region Enumerators
+
+        private enum attackStates {
+            NotAttacking, Meele, Ranged
         }
 
         #endregion
@@ -81,6 +102,18 @@ namespace com.cringejam.sticksandstones {
                     }
                 }
             }
+            //Check state
+            switch (AttackState) {
+                case attackStates.Meele:
+                    Meeled();
+                    break;
+                case attackStates.Ranged:
+                    Ranged();
+                    break;
+                default: //Not attacking
+                    //Do nothing
+                    break;
+            }
             //Check
             if (enemy != null) {
                 //Declare
@@ -88,21 +121,112 @@ namespace com.cringejam.sticksandstones {
                 //Rotate towards
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(enemyDirection), GetRotationSpeed());
                 //Check for mouse
-                CheckForMouse();
+                CheckForMouse(enemy);
             } else {
-
                 //Rotate towards
                 transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originalLocalRotation, GetRotationSpeed());
             }
         }
 
-        private void CheckForMouse() {
+        private void Meeled() {
+            //Check
+            if (meeleForward) {
+                //Rotate
+                stickLocalRotatorTransform.localRotation =
+                    Quaternion.RotateTowards(stickLocalRotatorTransform.localRotation, Quaternion.identity, GetStickMeeleSpeed());
+                //Check
+                if (stickLocalRotatorTransform.localRotation == Quaternion.identity) {
+                    //Change
+                    AttackState = attackStates.NotAttacking;
+                }
+            } else {
+                //Rotate
+                stickLocalRotatorTransform.localRotation = 
+                    Quaternion.RotateTowards(stickLocalRotatorTransform.localRotation, Quaternion.Euler(-180f, 0f, 0f), GetStickMeeleSpeed());
+                //Check
+                if (stickLocalRotatorTransform.localRotation == Quaternion.Euler(-180f, 0f, 0f)) {
+                    //Set
+                    meeleForward = true;
+                }
+            }
+        }
+
+        private float GetStickMeeleSpeed() {
+            //Return
+            return rotateForwardSpeed * Time.deltaTime;
+        }
+
+        private void Ranged() {
+            //Check
+            if (rangedForward) {
+                //Go backward
+                stickLocalTransform.localPosition =
+                    Vector3.MoveTowards(stickLocalTransform.localPosition, stickRangedForwardTransform.localPosition, GetStickRangedSpeed());
+                //Check
+                if (stickLocalTransform.localPosition == stickRangedForwardTransform.localPosition) {
+                    //Change
+                    AttackState = attackStates.NotAttacking;
+                }
+            } else {
+                //Go backward
+                stickLocalTransform.localPosition = 
+                    Vector3.MoveTowards(stickLocalTransform.localPosition, stickRangedBackTransform.localPosition, GetStickRangedSpeed());
+                //Check
+                if (stickLocalTransform.localPosition == stickRangedBackTransform.localPosition) {
+                    //Change
+                    rangedForward = true;
+                }
+            }
+        }
+
+        private float GetStickRangedSpeed() {
+            //Return
+            return forwardSpeed * Time.deltaTime;
+        }
+
+        private void CheckForMouse(Transform collisionModel) {
             //Check for left click
             if (Input.GetMouseButtonDown(0)) {
-                //Shoot enemy
-                Debug.Log("Enemy melee attack");
+                //Check
+                if (AttackState == attackStates.NotAttacking) {
+
+                    DoAttackOf(collisionModel, meeleDamage);
+
+                    //Shoot enemy
+                    Debug.Log("Enemy melee attack");
+                    //Change state
+                    AttackState = attackStates.Meele;
+
+                    //Set
+                    meeleForward = false;
+                }
             } else if (Input.GetMouseButtonDown(1)) { //Check for right click
-                Debug.Log("Enemy ranged attack");
+                //Check
+                if (AttackState == attackStates.NotAttacking) {
+
+                    DoAttackOf(collisionModel, rangedDamage);
+
+                    //Change state
+                    AttackState = attackStates.Ranged;
+                    Debug.Log("Enemy ranged attack");
+                    //Set
+                    rangedForward = false;
+                }
+            }
+        }
+
+        private void DoAttackOf(Transform collisionModel, int damage) {
+            //Declare
+            Enemy enemy = collisionModel.GetComponent<Enemy>();
+
+            //Deal damage
+            enemy.fullHealth -= damage;
+
+            //Check health
+            if (enemy.fullHealth <= 0) {
+                GameObject droppable = Instantiate(PublicStatics.gameManager.TextUIs[0].Prefab);
+                droppable.transform.position = collisionModel.parent.GetChild(0).position;
+                Destroy(collisionModel.parent.gameObject);
             }
         }
 
