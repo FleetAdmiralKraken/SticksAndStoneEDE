@@ -29,6 +29,19 @@ namespace com.cringejam.sticksandstones {
         #region Start
 
         private void Start() {
+            //Check
+            if (!PublicStatics.initializeOnce) {
+                //Initialize game saving
+                PublicStatics.InitializeGameSaving();
+                //Set
+                TextUIs[0].TheNumber = PublicStatics.gameData.Rocks;
+                TextUIs[1].TheNumber = PublicStatics.gameData.Metals;
+                TextUIs[2].TheNumber = PublicStatics.gameData.Souls;
+                //Update text on screen
+                UpdateTextOnScreen();
+                //Set
+                PublicStatics.initializeOnce = true;
+            }
             //Set
             PublicStatics.gameManager = this;
             PublicStatics.inputCache = inputCache;
@@ -38,6 +51,23 @@ namespace com.cringejam.sticksandstones {
             craftMenu.SetActive(false);
             //Disable
             craftButton.enabled = false;
+        }
+
+        private void UpdateTextOnScreen() {
+            //Loop
+            for (int i = 0; i < TextUIs.Length; i++) {
+                //Declare
+                string theNumber = TextUIs[i].TheNumber.ToString();
+                //Update text on screen index
+                UpdateTextOnScreenIndex(i, theNumber);
+            }
+        }
+
+        public void UpdateTextOnScreenIndex(int index, string theNumber) {
+            //Update UI
+            TextUIs[index].TheText.text = theNumber;
+            //Update craft
+            TextUIs[index].CraftText.text = theNumber;
         }
 
         #endregion
@@ -51,6 +81,7 @@ namespace com.cringejam.sticksandstones {
             public string Tag = string.Empty;
             public GameObject Prefab = null;
             [NonSerialized] public int TheNumber = 0;
+            public TextMeshProUGUI CraftText = null;
         }
 
         #endregion

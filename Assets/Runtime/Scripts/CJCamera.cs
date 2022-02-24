@@ -52,8 +52,22 @@ namespace com.cringejam.sticksandstones {
                         if (raycastHit.transform.CompareTag(PublicStatics.gameManager.TextUIs[i].Tag)) {
                             //Add
                             PublicStatics.gameManager.TextUIs[i].TheNumber += 1;
+                            //Check index
+                            switch (i) {
+                                default: //0
+                                    PublicStatics.gameData.Rocks += 1;
+                                    break;
+                                case 1:
+                                    PublicStatics.gameData.Metals += 1;
+                                    break;
+                                case 2:
+                                    PublicStatics.gameData.Souls += 1;
+                                    break;
+                            }
+                            //Save
+                            PublicStatics.SaveData();
                             //Update text
-                            PublicStatics.gameManager.TextUIs[i].TheText.text = PublicStatics.gameManager.TextUIs[i].TheNumber.ToString();
+                            PublicStatics.gameManager.UpdateTextOnScreenIndex(i, PublicStatics.gameManager.TextUIs[i].TheNumber.ToString());
                             //Destroy object
                             Destroy(raycastHit.transform.gameObject);
                             //Exit

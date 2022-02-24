@@ -772,14 +772,17 @@ MonoBehaviour:
     Tag: Rock
     Prefab: {fileID: 5814150062869523586, guid: 2d94c122908b4114f8b8f99a5cc39bf5,
       type: 3}
+    CraftText: {fileID: 1697275064}
   - TheText: {fileID: 605286041}
     Tag: Metal
     Prefab: {fileID: 1874142578475653581, guid: a06e39bf0bcbd8b49916cfad383d133c,
       type: 3}
+    CraftText: {fileID: 1649549873}
   - TheText: {fileID: 1396534556}
     Tag: Soul
     Prefab: {fileID: 8411943997922865553, guid: 940e016a9f4d25049bfc963f6cf0e9b6,
       type: 3}
+    CraftText: {fileID: 1945711324}
   gameCursor: {fileID: 315546669}
   craftMenu: {fileID: 321191877}
   craftButton: {fileID: 1978538828}
