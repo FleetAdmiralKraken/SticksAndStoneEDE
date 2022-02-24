@@ -471,6 +471,38 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1507231925}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &201368492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201368493}
+  m_Layer: 6
+  m_Name: Precursor
+  m_TagString: Precursor
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &201368493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201368492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 427443569}
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209105585
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +799,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 1072146901}
   - {fileID: 1320299855}
+  - {fileID: 201368493}
   TextUIs:
   - TheText: {fileID: 2009454127}
     Tag: Rock
@@ -1360,9 +1393,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 386546634}
-  m_Layer: 0
-  m_Name: PrecursorLittle0
-  m_TagString: Untagged
+  - component: {fileID: 386546635}
+  - component: {fileID: 386546636}
+  - component: {fileID: 386546637}
+  m_Layer: 6
+  m_Name: Default
+  m_TagString: Precursor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1375,7 +1411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386546633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 30}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1387,8 +1423,83 @@ Transform:
   - {fileID: 8861811683210276370}
   - {fileID: 7294039017943887225}
   - {fileID: 8375260755984970858}
-  m_Father: {fileID: 0}
-  m_RootOrder: 20
+  - {fileID: 1102459001}
+  m_Father: {fileID: 427443569}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &386546635
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386546633}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &386546636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386546633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d748a04e04c7d94590657356d3b49cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 6
+--- !u!114 &386546637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386546633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e7e5673b2792f4f8b7c39f15b5a136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultGraphics: {fileID: 386546633}
+  combatGraphics: {fileID: 533977302}
+  enemy: {fileID: 386546636}
+--- !u!1 &427443568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 427443569}
+  m_Layer: 6
+  m_Name: Graphics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &427443569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427443568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 386546634}
+  - {fileID: 533977303}
+  m_Father: {fileID: 201368493}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &533977302
 GameObject:
@@ -1399,13 +1510,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533977303}
-  m_Layer: 0
-  m_Name: PrecursorLittle1
+  m_Layer: 6
+  m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &533977303
 Transform:
   m_ObjectHideFlags: 0
@@ -1414,7 +1525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533977302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 33}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1425,8 +1536,8 @@ Transform:
   - {fileID: 261012548381365419}
   - {fileID: 3368262538441628775}
   - {fileID: 6882006635446630554}
-  m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_Father: {fileID: 427443569}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &589336855
 GameObject:
@@ -2949,7 +3060,7 @@ MonoBehaviour:
   floatingSphereTransform: {fileID: 1345972344}
   rotationSpeed: 250
   enemiesAndDistances:
-  - Tag: Pleb
+  - Tag: Precursor
     DistanceToRaycast: 4
   - Tag: Gargoyle
     DistanceToRaycast: 6
@@ -3321,6 +3432,70 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86115fe63d00b1548af1e9831faa4182, type: 3}
+--- !u!1 &1102459000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1102459001}
+  - component: {fileID: 1102459002}
+  - component: {fileID: 1102459003}
+  m_Layer: 6
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1102459001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102459000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 386546634}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1102459002
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102459000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1102459003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102459000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec217f6ef3573c46b5d643b98c85127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1129231255
 GameObject:
   m_ObjectHideFlags: 0
@@ -8209,7 +8384,7 @@ GameObject:
   - component: {fileID: 8861811683210276370}
   - component: {fileID: 3508235480547934484}
   - component: {fileID: 7726542675788293353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone.sml.Round
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8633,7 +8808,7 @@ Transform:
   - {fileID: 6514557473463985048}
   - {fileID: 3029678647809029132}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &586240519978954720
 GameObject:
@@ -8850,7 +9025,7 @@ GameObject:
   - component: {fileID: 1999213550550185963}
   - component: {fileID: 4745391735214499366}
   - component: {fileID: 344043235974958959}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Soulcore.sml
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9271,7 +9446,7 @@ GameObject:
   - component: {fileID: 6882006635446630554}
   - component: {fileID: 5202798257962242019}
   - component: {fileID: 1202810895765706467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.v1.Stone6.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9331,7 +9506,7 @@ GameObject:
   - component: {fileID: 261012548381365419}
   - component: {fileID: 6179607226874880819}
   - component: {fileID: 7006291445164972064}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.v1.Stone4.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9641,7 +9816,7 @@ GameObject:
   - component: {fileID: 5856582572947448724}
   - component: {fileID: 8308905494652992489}
   - component: {fileID: 540841283706645734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.v1.Soulcore.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9784,7 +9959,7 @@ GameObject:
   - component: {fileID: 7536310080285842998}
   - component: {fileID: 7368490722494309491}
   - component: {fileID: 1137078467498954538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone.sml.Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9998,7 +10173,7 @@ GameObject:
   - component: {fileID: 5683714087085480953}
   - component: {fileID: 7342600955945859475}
   - component: {fileID: 6554647391448381313}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone.sml.Biground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10684,7 +10859,7 @@ GameObject:
   - component: {fileID: 5879392646343380306}
   - component: {fileID: 3981660136028734070}
   - component: {fileID: 5695433317004951897}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.v1.Stone2.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11985,7 +12160,7 @@ GameObject:
   - component: {fileID: 6037599715233586726}
   - component: {fileID: 7439680309843753738}
   - component: {fileID: 1284436659331578092}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.v1.Stone1.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12336,7 +12511,7 @@ GameObject:
   - component: {fileID: 3368262538441628775}
   - component: {fileID: 5016043418080242082}
   - component: {fileID: 5589846921214532927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.v1.Stone5.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13226,7 +13401,7 @@ GameObject:
   - component: {fileID: 929772472358346019}
   - component: {fileID: 7956959510975748386}
   - component: {fileID: 5246890687339641339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.v1.Stone3.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13302,7 +13477,7 @@ GameObject:
   - component: {fileID: 8375260755984970858}
   - component: {fileID: 2948007580811796323}
   - component: {fileID: 6421567068443639284}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone.sml.Tshirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13922,7 +14097,7 @@ GameObject:
   - component: {fileID: 7002330821379654356}
   - component: {fileID: 6634047606561404869}
   - component: {fileID: 8615435473429938580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone.sml.Rect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14130,7 +14305,7 @@ GameObject:
   - component: {fileID: 7294039017943887225}
   - component: {fileID: 1254306605097393244}
   - component: {fileID: 8415068871143761545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone.sml.Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14305,7 +14480,7 @@ GameObject:
   - component: {fileID: 5667358164667134954}
   - component: {fileID: 5407399722162435571}
   - component: {fileID: 858635992173201287}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Precursor.Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}

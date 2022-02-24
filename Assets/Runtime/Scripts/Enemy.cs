@@ -15,6 +15,8 @@ namespace com.cringejam.sticksandstones {
         //Declare publics
         [NonSerialized] public int fullHealth = 0;
 
+        public event EventHandler<int> OnDamageDealtEvent = default;
+
         #endregion
 
         #region Start
@@ -23,6 +25,8 @@ namespace com.cringejam.sticksandstones {
             //Set
             fullHealth = health;
         }
+
+        public void OnDamageDealt(int damage) => OnDamageDealtEvent?.Invoke(this, damage);
 
         #endregion
 

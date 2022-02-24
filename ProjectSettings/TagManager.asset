@@ -11,6 +11,7 @@ TagManager:
   - Rock
   - Metal
   - Soul
+  - Precursor
   layers:
   - Default
   - TransparentFX

@@ -219,6 +219,8 @@ namespace com.cringejam.sticksandstones {
             //Declare
             Enemy enemy = collisionModel.GetComponent<Enemy>();
 
+            enemy.OnDamageDealt(damage);
+
             //Deal damage
             enemy.fullHealth -= damage;
 
